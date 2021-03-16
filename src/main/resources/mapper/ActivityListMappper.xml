@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzx.mapper.ActivityListMapper">
+    <select id="selectActivities" resultType="com.hzx.pojo.Activity">
+        select user_id,user_name,image,type,title,state,bid from user,activity where activity.create_user = user.user_id
+        and
+        (title like #{text} or text like #{text})
+        <if test="school != null and school != ''">
+            and school=#{school}
+        </if>
+        <if test=" type != -1">
+            and type=#{type}
+        </if>
+        <choose>
+            <when test="sort==1">
+                order by hot DESC
+            </when>
+            <otherwise>
+                order by time DESC
+            </otherwise>
+        </choose>
+    </select>
+</mapper>
