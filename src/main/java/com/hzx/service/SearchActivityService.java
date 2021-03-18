@@ -36,10 +36,23 @@ public class SearchActivityService {
 
         List<ActivityItem> items = new ArrayList<>();
         for (Activity activity : activityPage.getRecords()) {
-            ActivityItem item = new ActivityItem(activity.getUserName(), activity.getType(), activity.getTitle(), StringUtil.isEmpty(activity.getImage()) ? FinalString.DEFAULT_HEAD_IMAGE : activity.getImage(), (activity.getState() == 0 && activity.getUserId() == uid) ? -1 : activity.getState(), activity.getBid());
-            items.add(item);
+            generateItem(uid, items, activity);
         }
         ActivityContainer container = new ActivityContainer(items, activityPage.hasNext());
         return container;
+    }
+
+    public ActivityContainer searchActivityById(Integer uid){
+        List<Activity> activityList=activityListMapper.selectActivityById(uid);
+        List<ActivityItem> items = new ArrayList<>();
+        for (Activity activity : activityList) {
+            generateItem(uid, items, activity);
+        }
+        return new ActivityContainer(items,false);
+    }
+
+    private void generateItem(Integer uid, List<ActivityItem> items, Activity activity) {
+        ActivityItem item = new ActivityItem(activity.getUserName(), activity.getType(), activity.getTitle(), StringUtil.isEmpty(activity.getImage()) ? FinalString.DEFAULT_HEAD_IMAGE : activity.getImage(), (activity.getState() == 0 && activity.getUserId() == uid) ? -1 : activity.getState(), activity.getBid());
+        items.add(item);
     }
 }

@@ -15,10 +15,14 @@ public class SearchActivityController {
     SearchActivityService searchActivityService;
 
     @GetMapping(value = "/searchAll")
-    public String searchById(@RequestParam("uid") Integer uid, @RequestParam("text") String text,
-                             @RequestParam("school") String school, @RequestParam("type") Integer type,
-                             @RequestParam("sort") Integer sort, @RequestParam("page") int page) {
+    public String searchByConditions(@RequestParam("uid") Integer uid, @RequestParam("text") String text,
+                                     @RequestParam("school") String school, @RequestParam("type") Integer type,
+                                     @RequestParam("sort") Integer sort, @RequestParam("page") int page) {
         return GsonUtil.objectToJson(searchActivityService.searchActivity(uid, text, school, type, sort, page));
     }
 
+    @GetMapping(value = "/searchMine")
+    public String searchById(@RequestParam("uid") Integer uid) {
+        return GsonUtil.objectToJson(searchActivityService.searchActivityById(uid));
+    }
 }
