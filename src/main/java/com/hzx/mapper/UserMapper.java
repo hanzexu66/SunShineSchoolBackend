@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.hzx.pojo.User;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
@@ -15,7 +16,7 @@ import java.util.Map;
 public interface UserMapper extends BaseMapper<User> {
 
     @Select("SELECT * FROM user WHERE user_id = #{id}")
-    List<User> selectById(int id);
+    User selectById(int id);
 
     @Override
     List<User> selectByMap(Map<String, Object> columnMap);
@@ -28,4 +29,14 @@ public interface UserMapper extends BaseMapper<User> {
 
     @Override
     int insert(User entity);
+
+    @Update("update user set password=#{newPassword} where user_id=#{uid}")
+    boolean updatePassword(int uid, String newPassword);
+
+    @Select("select count(*) from user where user_id=#{uid} and password=#{oldPassword}")
+    Integer selectByPasswordAndId(int uid, String oldPassword);
+
+    @Update("update user set real_name=#{realName},school=#{school},user_name=#{userName}," +
+            "sid=#{sid},profile=#{profile} where user_id=#{uid}")
+    boolean updateInfo(int uid, String realName, String school, String userName, String sid, String profile);
 }

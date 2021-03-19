@@ -2,6 +2,7 @@ package com.hzx;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.hzx.mapper.FriendMapper;
 import com.hzx.mapper.UserMapper;
 import com.hzx.pojo.Activity;
 import com.hzx.pojo.ActivityContainer;
@@ -42,8 +43,13 @@ class SunSchool01ApplicationTests {
 
     @Autowired
     RedisUtil redisUtil;
+
+    @Autowired
+    FriendMapper friendMapper;
+
     @Test
     void contextLoads() throws SQLException {
+
     }
 
 }
