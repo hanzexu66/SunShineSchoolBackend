@@ -2,6 +2,7 @@ package com.hzx;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.hzx.mapper.ChatMapper;
 import com.hzx.mapper.FriendMapper;
 import com.hzx.mapper.UserMapper;
 import com.hzx.pojo.Activity;
@@ -46,6 +47,9 @@ class SunSchool01ApplicationTests {
 
     @Autowired
     FriendMapper friendMapper;
+
+    @Autowired
+    ChatMapper chatMapper;
 
     @Test
     void contextLoads() throws SQLException {

@@ -23,5 +23,6 @@ spring:
     port: 6379
 server:
   port: 2021
+  connection-timeout: 18000000
 mybatis-plus:
   mapper-locations: classpath:mapper/*.xml

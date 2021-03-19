@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
+import java.util.Random;
 
 @Service
 public class AccountService {
@@ -39,6 +40,7 @@ public class AccountService {
             user.setSchool(school);
             user.setSid(sid);
             user.setUserName(userName);
+            user.setImage(FinalString.IMAGE_ROOT + ((int) (Math.random() * 100)) % 10 + ".jpg");
             userMapper.insert(user);
             //添加好友
             friendMapper.insert(new Friend(1, user.getUserId(), null, null));
