@@ -31,7 +31,7 @@ public class SearchActivityService {
         if (activityPage == null) {
             activityPage = new Page<>(page, 6);
             activityListMapper.selectActivities(activityPage, "%" + text + "%", school, type, sort);
-            redisUtil.set(key, activityPage, 600);
+            redisUtil.set(key, activityPage, 5);
         }
 
         List<ActivityItem> items = new ArrayList<>();
