@@ -40,8 +40,8 @@ public class AccountService {
             user.setSchool(school);
             user.setSid(sid);
             user.setUserName(userName);
-            user.setImage(FinalString.IMAGE_ROOT + ((int) (Math.random() * 100)) % 10 + ".jpg");
             userMapper.insert(user);
+            userMapper.updateById(user.getUserId(), FinalString.IMAGE_ROOT + (user.getUserId()) % 10 + ".jpg");
             //添加好友
             friendMapper.insert(new Friend(1, user.getUserId(), null, null));
             chatService.sendMessage(1, user.getUserId(), FinalString.HELLO_FROM_SYSTEM);

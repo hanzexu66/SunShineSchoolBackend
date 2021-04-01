@@ -30,6 +30,9 @@ public interface UserMapper extends BaseMapper<User> {
     @Override
     int insert(User entity);
 
+    @Update("update user set image=#{image} where user_id=#{uid}")
+    int updateById(int uid, String image);
+
     @Update("update user set password=#{newPassword} where user_id=#{uid}")
     boolean updatePassword(int uid, String newPassword);
 
