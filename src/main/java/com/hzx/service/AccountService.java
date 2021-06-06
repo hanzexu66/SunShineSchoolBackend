@@ -9,6 +9,7 @@ import com.hzx.pojo.User;
 import com.hzx.utils.FinalString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Date;
 import java.util.Random;
@@ -32,6 +33,7 @@ public class AccountService {
         return user != null ? user.getUserId() : -1;
     }
 
+    @Transactional(rollbackFor = {RuntimeException.class, Error.class})
     public Boolean register(String userName, String school, String realName, String password, String sid) {
         if (userMapper.selectByName(userName).isEmpty()) {
             User user = new User();

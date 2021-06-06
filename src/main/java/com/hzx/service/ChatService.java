@@ -9,6 +9,7 @@ import com.hzx.pojo.MsgItem;
 import com.hzx.utils.FinalString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ public class ChatService {
     @Autowired
     FriendMapper friendMapper;
 
+    @Transactional(rollbackFor = {RuntimeException.class, Error.class})
     public void sendMessage(Integer sendUser, Integer receiveUser, String text) {
         chatMapper.insert(new Chat(sendUser, receiveUser, LocalDateTime.now(), text));
         friendMapper.update(sendUser, receiveUser, text, LocalDateTime.now());
