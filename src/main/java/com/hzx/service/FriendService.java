@@ -31,7 +31,6 @@ public class FriendService {
     }
 
     public boolean deleteFriend(int uid1, int uid2) {
-        if(uid2==1) return false;
         return friendMapper.deleteFriend(uid1, uid2);
     }
 }
